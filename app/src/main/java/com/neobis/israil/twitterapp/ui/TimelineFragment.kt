@@ -78,6 +78,33 @@ class TimelineFragment : Fragment(), TimelineFragmentViewModel.TimelineRefreshLi
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.menu_timeline, menu)
 
+        val searchItem = menu!!.findItem(R.id.action_search)
+        if(searchItem != null) {
+            val searchView = searchItem.actionView as SearchView
+            val editext = searchView.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+            editext.hint = "Search here..."
+
+            searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if(newText!!.isNotEmpty()){
+                        val search = newText.toLowerCase()
+                        timelineFragmentVM!!.searchTweets(newText)
+                    }else{
+                        timelineFragmentVM!!.getTweets()
+                    }
+                    timelineAdapter.notifyDataSetChanged()
+                    return true
+                }
+
+            })
+
+        }
+
       }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

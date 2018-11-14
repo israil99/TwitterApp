@@ -54,6 +54,21 @@ class TimelineFragmentViewModel(val timelineRefreshListener: TimelineRefreshList
         }
     }
 
+    fun searchTweets(query:String) {
+        TwitterCore.getInstance().apiClient.searchService.tweets(query, null, null, null, null,null,null,null,null,null)
+                .enqueue(object : Callback<Search>() {
+                    override fun failure(exception: TwitterException?) {
+                        Log.d(TAG, "FAILURE")
+                        Log.d(TAG, exception!!.message.toString())
+                    }
+                    override fun success(result: Result<Search>) {
+                        Log.d("Success",result.toString())
+                        timelineRefreshListener.onRefreshAfterSearch(result)
+                        isLoading.set(View.INVISIBLE)
+                    }
+                })
+    }
+
 
     interface TimelineRefreshListener {
         fun onTimelineRefresh(tweets: List<Tweet>)
