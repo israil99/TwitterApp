@@ -55,8 +55,7 @@ class TimelineFragment : Fragment(), TimelineFragmentViewModel.TimelineRefreshLi
         binding!!.vm = timelineFragmentVM
 
         binding!!.timelineRecview.apply {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
+
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity)
             // specify an adapter (see also next example)
@@ -130,7 +129,7 @@ class TimelineFragment : Fragment(), TimelineFragmentViewModel.TimelineRefreshLi
     }
 
     companion object {
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+        // the fragment initialization parameters
         private val ARG_PARAM1 = "param1"
 
         fun newInstance(param1: String): TimelineFragment {

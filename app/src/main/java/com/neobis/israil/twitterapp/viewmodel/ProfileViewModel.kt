@@ -19,7 +19,6 @@ class ProfileViewModel(context: Context, imageUrl : String) {
     init {
         this.IMAGE_URL = imageUrl
         profileImage = ObservableField<Drawable>()
-        // Picasso keeps a weak reference to the target so it needs to be stored in a field
         bindableFieldTarget = BindableFieldTarget(profileImage!!, context.getResources())
         Picasso.with(context)
                 .load(IMAGE_URL)

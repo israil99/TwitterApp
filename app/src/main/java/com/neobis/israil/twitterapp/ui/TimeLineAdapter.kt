@@ -24,7 +24,6 @@ class TimelineAdapter(var items: List<Tweet>) : RecyclerView.Adapter<TimelineAda
     class TimelineViewHolder(var view: TimelineItemBinding) : RecyclerView.ViewHolder(view.root)
 
     override fun onBindViewHolder(holder: TimelineViewHolder, position: Int) {
-        // - get element from your dataset at this position & replace the contents of the view with that element
         holder!!.view.vm!!.tweet.set(items[position].text)
         holder.view.vm!!.user.set(items[position].user.screenName)
         val profileViewModel = ProfileViewModel(MainApplication.applicationContext(), items[position].user.profileImageUrl)
